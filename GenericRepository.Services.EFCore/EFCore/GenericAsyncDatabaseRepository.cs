@@ -10,14 +10,13 @@ using System.Threading.Tasks;
 
 namespace GenericRepository.Services.EFCore
 {
-    class GenericAsyncDatabaseRepository<TDbContext, TEntity> : CommonGenericDbRepository,
+    class GenericAsyncDatabaseRepository<TEntity> : CommonGenericDbRepository,
         IGenericAsyncRepository<TEntity>
-        where TDbContext : DbContext
         where TEntity : class
     {
-        private TDbContext _context;
+        private DbContext _context;
 
-        public GenericAsyncDatabaseRepository(TDbContext context)
+        public GenericAsyncDatabaseRepository(DbContext context)
         {
             _context = context;
         }

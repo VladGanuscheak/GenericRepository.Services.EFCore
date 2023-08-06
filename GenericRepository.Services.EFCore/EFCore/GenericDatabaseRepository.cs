@@ -9,14 +9,13 @@ using System.Linq.Expressions;
 
 namespace GenericRepository.Services.EFCore
 {
-    public class GenericDatabaseRepository<TDbContext, TEntity> : CommonGenericDbRepository, 
-        IGenericRepository<TEntity> 
-        where TDbContext : DbContext 
+    public class GenericDatabaseRepository<TEntity> : CommonGenericDbRepository, 
+        IGenericRepository<TEntity>
         where TEntity : class
     {
-        private TDbContext _context;
+        private DbContext _context;
 
-        public GenericDatabaseRepository(TDbContext context)
+        public GenericDatabaseRepository(DbContext context)
         {
             _context = context;
         }
