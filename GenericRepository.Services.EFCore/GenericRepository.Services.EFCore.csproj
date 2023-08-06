@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.0</TargetFramework>
+    <PackageId>GenericRepository.Services.EFCore</PackageId>
+    <Version>1.1.0</Version>
+    <Authors>Ganușceac Vlad</Authors>
+    <Product>GenericRepository.Services.EFCore</Product>
+    <Title>GenericRepository.Services.EFCore</Title>
+    <Description>Implements EFCore version of the GenericRepository's contracts.</Description>
+    <RepositoryUrl>https://github.com/VladGanuscheak/GenericRepository.Services.EFCore</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>generic;repository;genericrepository;.net;dotnet;c#;contracts;services;efcore</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GenericRepository.Contracts" Version="1.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="1.0.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+  
+</Project>
