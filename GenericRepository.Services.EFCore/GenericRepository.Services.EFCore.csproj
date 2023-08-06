@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp1.0</TargetFramework>
     <PackageId>GenericRepository.Services.EFCore</PackageId>
-    <Version>1.1.0</Version>
+    <Version>1.0.0-alpha</Version>
     <Authors>Ganușceac Vlad</Authors>
     <Product>GenericRepository.Services.EFCore</Product>
     <Title>GenericRepository.Services.EFCore</Title>
