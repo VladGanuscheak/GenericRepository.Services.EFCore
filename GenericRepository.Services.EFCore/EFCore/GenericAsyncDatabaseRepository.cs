@@ -23,6 +23,7 @@ namespace GenericRepository.Services.EFCore
             _context = context;
         }
 
+        /// <inheritdoc/>
         public async Task<TEntity> GetAsync([Required] DataModelOptions<TEntity> options, 
             CancellationToken cancellationToken = default)
             => await List(SetAsNoTracking 
@@ -31,6 +32,7 @@ namespace GenericRepository.Services.EFCore
                 options)
             .FirstOrDefaultAsync(cancellationToken);
 
+        /// <inheritdoc/>
         public async Task<TDestination> GetAsync<TDestination>([Required] ComplexDataModelOptions<TEntity, TDestination> options, 
             CancellationToken cancellationToken = default)
             => await List(SetAsNoTracking
@@ -39,6 +41,7 @@ namespace GenericRepository.Services.EFCore
                 options)
             .FirstOrDefaultAsync(cancellationToken);
 
+        /// <inheritdoc/>
         public async Task<IEnumerable<TEntity>> ListAsync([Required] DataModelOptions<TEntity> options, 
             CancellationToken cancellationToken = default)
             => await List(SetAsNoTracking
@@ -47,6 +50,7 @@ namespace GenericRepository.Services.EFCore
                 options)
             .ToListAsync(cancellationToken);
 
+        /// <inheritdoc/>
         public async Task<IEnumerable<TDestination>> ListAsync<TDestination>([Required] ComplexDataModelOptions<TEntity, TDestination> options, 
             CancellationToken cancellationToken = default)
             => await List(SetAsNoTracking
@@ -55,6 +59,7 @@ namespace GenericRepository.Services.EFCore
                 options)
             .ToListAsync(cancellationToken);
 
+        /// <inheritdoc/>
         public async Task CreateAsync([Required] TEntity entity, 
             CancellationToken cancellationToken = default)
         {
@@ -64,6 +69,7 @@ namespace GenericRepository.Services.EFCore
             await _context.SaveChangesAsync(cancellationToken);
         }
 
+        /// <inheritdoc/>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0059", Justification = "<Waiting>")]
         public async Task UpdateAsync([Required] Expression<Func<TEntity, bool>> searchClause, 
             [Required] TEntity entity, 
@@ -80,6 +86,7 @@ namespace GenericRepository.Services.EFCore
             
         }
 
+        /// <inheritdoc/>
         public async Task DeleteAsync([Required] Expression<Func<TEntity, bool>> searchClause, CancellationToken cancellationToken = default)
         {
             var entities = await List(_context.Set<TEntity>().AsNoTracking(), new DataModelOptions<TEntity> { EntitySearchClause = searchClause })
