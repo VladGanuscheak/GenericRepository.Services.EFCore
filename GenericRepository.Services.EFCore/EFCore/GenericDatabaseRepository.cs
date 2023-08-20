@@ -15,22 +15,34 @@ namespace GenericRepository.Services.EFCore
     {
         private DbContext _context;
 
+        public bool SetAsNoTracking { get; set; } = true;
+
         public GenericDatabaseRepository(DbContext context)
         {
             _context = context;
         }
 
         public TEntity Get([Required] DataModelOptions<TEntity> options) 
-            => List(options).FirstOrDefault();
+            => List(SetAsNoTracking
+                ? _context.Set<TEntity>().AsNoTracking()
+                : _context.Set<TEntity>(), options).FirstOrDefault();
 
         public TDestination Get<TDestination>([Required] ComplexDataModelOptions<TEntity, TDestination> options)
-            => List(options).FirstOrDefault();
+            => List(SetAsNoTracking
+                ? _context.Set<TEntity>().AsNoTracking()
+                : _context.Set<TEntity>(), options).FirstOrDefault();
 
         public IEnumerable<TEntity> List([Required] DataModelOptions<TEntity> options)
-            => List(_context.Set<TEntity>().AsNoTracking(), options);
+            => List(SetAsNoTracking
+                ? _context.Set<TEntity>().AsNoTracking()
+                : _context.Set<TEntity>(),
+                options);
 
         public IEnumerable<TDestination> List<TDestination>([Required] ComplexDataModelOptions<TEntity, TDestination> options)
-            => List(_context.Set<TEntity>().AsNoTracking(), options);
+            => List(SetAsNoTracking
+                ? _context.Set<TEntity>().AsNoTracking()
+                : _context.Set<TEntity>(),
+                options);
 
         public void Create([Required] TEntity entity)
         {
@@ -43,7 +55,7 @@ namespace GenericRepository.Services.EFCore
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0059", Justification = "<Waiting>")]
         public void Update([Required] Expression<Func<TEntity, bool>> searchClause, [Required] TEntity entity)
         {
-            var item = List(_context.Set<TEntity>(), new DataModelOptions<TEntity> { EntitySearchClause = searchClause })
+            var item = List(_context.Set<TEntity>().AsNoTracking(), new DataModelOptions<TEntity> { EntitySearchClause = searchClause })
                 .FirstOrDefault();
 
             item = entity;
@@ -55,7 +67,7 @@ namespace GenericRepository.Services.EFCore
 
         public void Delete([Required] Expression<Func<TEntity, bool>> searchClause)
         {
-            var entities = List(_context.Set<TEntity>(), new DataModelOptions<TEntity> { EntitySearchClause = searchClause })
+            var entities = List(_context.Set<TEntity>().AsNoTracking(), new DataModelOptions<TEntity> { EntitySearchClause = searchClause })
                 .ToList();
 
             _context.Set<TEntity>()
