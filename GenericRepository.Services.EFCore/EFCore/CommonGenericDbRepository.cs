@@ -1,5 +1,6 @@
 ﻿using GenericRepository.Enums;
 using GenericRepository.Options;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -10,6 +11,15 @@ namespace GenericRepository.Services.EFCore
 {
     public abstract class CommonGenericDbRepository
     {
+        protected DbContext Context;
+
+        public bool SetAsNoTracking { get; set; } = true;
+
+        protected CommonGenericDbRepository(DbContext context)
+        {
+            Context = context;
+        }
+
         private IQueryable<TType> SortEntities<TType>(IQueryable<TType> entities,
             string sortingFieldName,
             SortingOrder sortingOrder)

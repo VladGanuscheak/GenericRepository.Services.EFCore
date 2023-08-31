@@ -13,74 +13,70 @@ namespace GenericRepository.Services.EFCore
         IGenericRepository<TEntity>
         where TEntity : class
     {
-        private DbContext _context;
-
-        public bool SetAsNoTracking { get; set; } = true;
-
         public GenericDatabaseRepository(DbContext context)
+            : base(context)
         {
-            _context = context;
         }
 
         /// <inheritdoc/>
         public TEntity Get([Required] DataModelOptions<TEntity> options) 
             => List(SetAsNoTracking
-                ? _context.Set<TEntity>().AsNoTracking()
-                : _context.Set<TEntity>(), options).FirstOrDefault();
+                ? Context.Set<TEntity>().AsNoTracking()
+                : Context.Set<TEntity>(), options).FirstOrDefault();
 
         /// <inheritdoc/>
         public TDestination Get<TDestination>([Required] ComplexDataModelOptions<TEntity, TDestination> options)
             => List(SetAsNoTracking
-                ? _context.Set<TEntity>().AsNoTracking()
-                : _context.Set<TEntity>(), options).FirstOrDefault();
+                ? Context.Set<TEntity>().AsNoTracking()
+                : Context.Set<TEntity>(), options).FirstOrDefault();
 
         /// <inheritdoc/>
         public IEnumerable<TEntity> List([Required] DataModelOptions<TEntity> options)
             => List(SetAsNoTracking
-                ? _context.Set<TEntity>().AsNoTracking()
-                : _context.Set<TEntity>(),
+                ? Context.Set<TEntity>().AsNoTracking()
+                : Context.Set<TEntity>(),
                 options);
 
         /// <inheritdoc/>
         public IEnumerable<TDestination> List<TDestination>([Required] ComplexDataModelOptions<TEntity, TDestination> options)
             => List(SetAsNoTracking
-                ? _context.Set<TEntity>().AsNoTracking()
-                : _context.Set<TEntity>(),
+                ? Context.Set<TEntity>().AsNoTracking()
+                : Context.Set<TEntity>(),
                 options);
 
         /// <inheritdoc/>
         public void Create([Required] TEntity entity)
         {
-            _context.Set<TEntity>()
+            Context.Set<TEntity>()
                 .Add(entity);
 
-            _context.SaveChanges();
+            Context.SaveChanges();
         }
 
         /// <inheritdoc/>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0059", Justification = "<Waiting>")]
         public void Update([Required] Expression<Func<TEntity, bool>> searchClause, [Required] TEntity entity)
         {
-            var item = List(_context.Set<TEntity>().AsNoTracking(), new DataModelOptions<TEntity> { EntitySearchClause = searchClause })
+            var item = List(Context.Set<TEntity>().AsNoTracking(), new DataModelOptions<TEntity> { EntitySearchClause = searchClause })
                 .FirstOrDefault();
 
             item = entity;
 
-            _context.Update(item);
+            Context.Update(item);
 
-            _context.SaveChanges();
+            Context.SaveChanges();
         }
 
         /// <inheritdoc/>
         public void Delete([Required] Expression<Func<TEntity, bool>> searchClause)
         {
-            var entities = List(_context.Set<TEntity>().AsNoTracking(), new DataModelOptions<TEntity> { EntitySearchClause = searchClause })
+            var entities = List(Context.Set<TEntity>().AsNoTracking(), new DataModelOptions<TEntity> { EntitySearchClause = searchClause })
                 .ToList();
 
-            _context.Set<TEntity>()
+            Context.Set<TEntity>()
                 .RemoveRange(entities);
 
-            _context.SaveChanges();
+            Context.SaveChanges();
         }
     }
 }
