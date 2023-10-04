@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
     <PackageId>GenericRepository.Services.EFCore</PackageId>
-    <Version>1.1.0</Version>
+    <Version>2.1.0</Version>
     <Authors>Ganușceac Vlad</Authors>
     <Product>GenericRepository.Services.EFCore</Product>
     <Title>GenericRepository.Services.EFCore</Title>
@@ -16,12 +16,12 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>logo.png</PackageIcon>
     <PackageIconUrl />
-    <PackageReleaseNotes>Migrated to .Net Core 1.1</PackageReleaseNotes>
+    <PackageReleaseNotes>Migrated to .Net Core 2.1</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GenericRepository.Contracts" Version="1.1.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="1.1.6" />
+    <PackageReference Include="GenericRepository.Contracts" Version="2.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.32" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,7 +42,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="Microsoft.NETCore.App" Version="1.1.13" />
+    <PackageReference Update="Microsoft.NETCore.App" Version="2.1.30" />
   </ItemGroup>
   
 </Project>
