@@ -30,7 +30,7 @@ namespace GenericRepository.Services.EFCore
 
                 if (propertyInfo == null)
                 {
-                    throw new ArgumentException();
+                    throw new ArgumentException("There is no such a sorting key!");
                 }
 
                 var parameter = Expression.Parameter(entityType, "x");

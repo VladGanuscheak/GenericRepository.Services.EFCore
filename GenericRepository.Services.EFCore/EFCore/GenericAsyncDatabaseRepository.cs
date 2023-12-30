@@ -86,7 +86,7 @@ namespace GenericRepository.Services.EFCore
         public async Task DeleteAsync([Required] Expression<Func<TEntity, bool>> searchClause, CancellationToken cancellationToken = default)
         {
             var entities = await List(Context.Set<TEntity>().AsNoTracking(), new DataModelOptions<TEntity> { EntitySearchClause = searchClause })
-                .ToListAsync();
+                .ToListAsync(cancellationToken);
 
             Context.Set<TEntity>()
                 .RemoveRange(entities);
