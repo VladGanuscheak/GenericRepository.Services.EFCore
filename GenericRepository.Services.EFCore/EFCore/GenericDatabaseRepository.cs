@@ -70,11 +70,9 @@ namespace GenericRepository.Services.EFCore
         /// <inheritdoc/>
         public void Delete([Required] Expression<Func<TEntity, bool>> searchClause)
         {
-            var entities = List(Context.Set<TEntity>().AsNoTracking(), new DataModelOptions<TEntity> { EntitySearchClause = searchClause })
-                .ToList();
+            var entities = List(Context.Set<TEntity>().AsNoTracking(), new DataModelOptions<TEntity> { EntitySearchClause = searchClause });
 
-            Context.Set<TEntity>()
-                .RemoveRange(entities);
+            entities.ExecuteDelete();
 
             Context.SaveChanges();
         }

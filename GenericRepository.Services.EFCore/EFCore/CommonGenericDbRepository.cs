@@ -26,13 +26,8 @@ namespace GenericRepository.Services.EFCore
             if (!string.IsNullOrWhiteSpace(sortingFieldName))
             {
                 var entityType = typeof(TType);
-                var propertyInfo = entityType.GetProperty(sortingFieldName);
-
-                if (propertyInfo == null)
-                {
-                    throw new ArgumentException("There is no such a sorting key!");
-                }
-
+                var propertyInfo = entityType.GetProperty(sortingFieldName) ?? throw new ArgumentException("There is no such a sorting key!");
+                
                 var parameter = Expression.Parameter(entityType, "x");
                 var property = Expression.Property(parameter, propertyInfo);
                 var lambda = Expression.Lambda(property, parameter);
