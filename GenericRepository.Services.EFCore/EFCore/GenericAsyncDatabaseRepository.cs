@@ -78,18 +78,15 @@ namespace GenericRepository.Services.EFCore
 
             Context.Update(item);
 
-            await Context.SaveChangesAsync(cancellationToken);
-            
+            await Context.SaveChangesAsync(cancellationToken);   
         }
 
         /// <inheritdoc/>
         public async Task DeleteAsync([Required] Expression<Func<TEntity, bool>> searchClause, CancellationToken cancellationToken = default)
         {
-            var entities = await List(Context.Set<TEntity>().AsNoTracking(), new DataModelOptions<TEntity> { EntitySearchClause = searchClause })
-                .ToListAsync(cancellationToken);
+            var entities = List(Context.Set<TEntity>().AsNoTracking(), new DataModelOptions<TEntity> { EntitySearchClause = searchClause });
 
-            Context.Set<TEntity>()
-                .RemoveRange(entities);
+            await entities.ExecuteDeleteAsync(cancellationToken);
 
             await Context.SaveChangesAsync(cancellationToken);
         }
