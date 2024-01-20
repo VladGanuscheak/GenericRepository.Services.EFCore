@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <PackageId>GenericRepository.Services.EFCore</PackageId>
-    <Version>7.0.1</Version>
+    <Version>8.0.0</Version>
     <Authors>Ganușceac Vlad</Authors>
     <Product>GenericRepository.Services.EFCore</Product>
     <Title>GenericRepository.Services.EFCore</Title>
@@ -16,13 +16,13 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>logo.png</PackageIcon>
     <PackageIconUrl />
-    <PackageReleaseNotes>Integrated the ExecuteDelete and ExecuteDeleteAsync methods of Microsoft.EntityFrameworkCore.Relational for performing Delete actions in this package.</PackageReleaseNotes>
+    <PackageReleaseNotes>Migrated to .Net Core 8.0</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GenericRepository.Contracts" Version="7.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.15" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.15" />
+    <PackageReference Include="GenericRepository.Contracts" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.1" />
   </ItemGroup>
 
   <ItemGroup>
